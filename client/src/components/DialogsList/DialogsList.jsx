@@ -2,6 +2,8 @@ import React from 'react'
 
 import styles from './styles.module.scss'
 
+import { DialogsItem } from './DialogsItem'
+
 export const DialogsList = () => {
     return (
         <div className={styles.dialogsWrapper}>
@@ -10,11 +12,11 @@ export const DialogsList = () => {
             </div>
             <div className={styles.dialogs}>
                 <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <DialogsItem />
+                    <DialogsItem active />
+                    <DialogsItem />
+                    <DialogsItem />
+                    <DialogsItem />
                 </ul>
             </div>
         </div>
