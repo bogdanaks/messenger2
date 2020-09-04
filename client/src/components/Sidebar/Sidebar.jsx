@@ -11,8 +11,9 @@ export const Sidebar = () => {
                 <li>
                     <FontAwesomeIcon icon={faBars} />
                 </li>
-                <li>
+                <li className={styles.active}>
                     <FontAwesomeIcon icon={faComments} />
+                    <span>Chats</span>
                 </li>
             </ul>
         </div>
