@@ -1,11 +1,17 @@
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-function App() {
+import { Main, Auth } from './pages'
+
+export const App = () => {
     return (
         <div className="App">
-            <h1>Hi</h1>
+            <Router>
+                <Switch>
+                    <Route path="/" component={Main} exact />
+                    <Route path="/auth" component={Auth} exact />
+                </Switch>
+            </Router>
         </div>
     )
 }
-
-export default App
