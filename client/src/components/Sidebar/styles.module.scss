@@ -1,0 +1,17 @@
+.sidebarWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    ul {
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            cursor: pointer;
+            svg {
+                font-size: 22px;
+            }
+        }
+    }
+}
