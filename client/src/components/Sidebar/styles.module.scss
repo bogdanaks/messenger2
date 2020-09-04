@@ -6,11 +6,21 @@
         li {
             display: flex;
             justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 60px;
             cursor: pointer;
+            color: rgb(118, 140, 158);
             svg {
                 font-size: 22px;
+            }
+            span {
+                font-size: 14px;
+            }
+
+            &.active {
+                color: rgb(94, 181, 247);
+                background-color: rgb(37, 48, 62);
             }
         }
     }
