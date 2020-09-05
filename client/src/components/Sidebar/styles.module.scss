@@ -25,3 +25,16 @@
         }
     }
 }
+@media (max-width: 767px) {
+    .sidebarWrapper {
+        flex-direction: row;
+        width: 100%;
+        ul {
+            display: flex;
+            flex-direction: row;
+            li {
+                width: 60px;
+            }
+        }
+    }
+}
