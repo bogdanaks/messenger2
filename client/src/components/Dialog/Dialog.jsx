@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGrin } from '@fortawesome/free-regular-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.scss'
 
@@ -10,6 +11,9 @@ export const Dialog = () => {
     return (
         <div className={styles.dialogWrapper}>
             <div className={styles.header}>
+                <div className={styles.openList}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </div>
                 <div className={styles.userInfo}>
                     <h5>Name</h5>
                     <span>4 members</span>
