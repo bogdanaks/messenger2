@@ -48,6 +48,7 @@ code {
     display: flex;
     flex-direction: row;
     background-color: rgba(14, 22, 33, 1);
+    position: relative;
 }
 @media (max-width: 767px) {
     /* стили для xs-устройств */
