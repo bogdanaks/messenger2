@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 import { validations } from '../../utils/functions/validations'
 import { useForm } from '../../utils/hooks/useForm'
 
-export const Auth = () => {
+export const Register = () => {
     const { errors, values, handleSubmit, handleChange } = useForm(callback, validations)
     function callback() {
         console.log(values)
@@ -13,15 +13,15 @@ export const Auth = () => {
         <div className={styles.authWrapper}>
             <h2>Register</h2>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <div className={[styles.inputForm, errors.email && styles.errorInput].join(' ')}>
+                <div className={[styles.inputForm, errors.name && styles.errorInput].join(' ')}>
                     <input
                         type="text"
-                        placeholder="E-Mail"
-                        name="email"
+                        placeholder="Nickname"
+                        name="name"
                         onChange={handleChange}
-                        value={values.email || ''}
+                        value={values.name || ''}
                     />
-                    {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+                    {errors.name && <span className={styles.errorText}>{errors.name}</span>}
                 </div>
                 <div className={[styles.inputForm, errors.password && styles.errorInput].join(' ')}>
                     <input
