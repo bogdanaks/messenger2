@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './styles.module.scss'
 import { validations } from '../../utils/functions/validations'
@@ -34,6 +35,9 @@ export const Register = () => {
                     {errors.password && <span className={styles.errorText}>{errors.password}</span>}
                 </div>
                 <button type="submit">Register</button>
+                <Link to="/login" className={styles.link}>
+                    Already registered? Go to Login
+                </Link>
             </form>
         </div>
     )
