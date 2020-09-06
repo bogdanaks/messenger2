@@ -1,11 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './styles.module.scss'
-import { validations } from '../../utils/functions/validations'
 import { useForm } from '../../utils/hooks/useForm'
 
 export const Login = () => {
-    const { errors, values, handleSubmit, handleChange } = useForm(callback, validations)
+    const { errors, values, handleSubmit, handleChange } = useForm(callback)
     function callback() {
         console.log(values)
     }
@@ -13,15 +13,15 @@ export const Login = () => {
         <div className={styles.authWrapper}>
             <h2>Login</h2>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <div className={[styles.inputForm, errors.email && styles.errorInput].join(' ')}>
+                <div className={[styles.inputForm, errors.name && styles.errorInput].join(' ')}>
                     <input
                         type="text"
-                        placeholder="E-Mail"
-                        name="email"
+                        placeholder="Nickname"
+                        name="name"
                         onChange={handleChange}
-                        value={values.email || ''}
+                        value={values.name || ''}
                     />
-                    {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+                    {errors.name && <span className={styles.errorText}>{errors.name}</span>}
                 </div>
                 <div className={[styles.inputForm, errors.password && styles.errorInput].join(' ')}>
                     <input
@@ -35,6 +35,9 @@ export const Login = () => {
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <Link to="/register" className={styles.link}>
+                Not registered yet? Go to Register
+            </Link>
         </div>
     )
 }
