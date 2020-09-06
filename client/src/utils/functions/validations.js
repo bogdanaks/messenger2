@@ -1,11 +1,15 @@
 export const validations = (values) => {
     let errors = {}
-    if (!values.email) {
-        errors.email = 'Email address is required'
+    if (!values.name) {
+        errors.name = 'Nickname is required'
     }
-    if (!/\S+@\S+\.\S+/.test(values.email)) {
-        errors.email = 'Email address is invalid'
+    if (values.name && parseInt(values.name[0])) {
+        errors.name = 'The nickname must start with a letter, not a number'
     }
+    if (values.name && values.name.length < 3) {
+        errors.name = 'Nickname at least 3 characters'
+    }
+
     if (!values.password) {
         errors.password = 'Password is required'
     }
