@@ -14,8 +14,8 @@ export const useForm = (callback, validations) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setIsSubmitting(true)
         setErrors(validations(values))
+        setIsSubmitting(true)
     }
     const handleChange = (e) => {
         e.persist()
