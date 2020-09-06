@@ -1,42 +1,37 @@
 import React from 'react'
 
 import styles from './styles.module.scss'
+import { validations } from '../../utils/functions/validations'
+import { useForm } from '../../utils/hooks/useForm'
 
 export const Auth = () => {
-    const [input, setInput] = React.useState({ email: '', password: '' })
-    const handlerInputChange = (e) => {
-        setInput({ ...input, [e.target.name]: e.target.value })
+    const { errors, values, handleSubmit, handleChange } = useForm(callback, validations)
+    function callback() {
+        console.log(values)
     }
-    const handlerBtnCLick = (e) => {
-        e.preventDefault()
-        console.log(input)
-    }
-
     return (
         <div className={styles.authWrapper}>
             <h2>Register</h2>
-            <form className={styles.form}>
-                <div className={styles.inputForm}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <div className={[styles.inputForm, errors.email && styles.errorInput].join(' ')}>
                     <input
                         type="text"
                         placeholder="E-mail"
                         name="email"
-                        onChange={handlerInputChange}
-                        value={input.email}
+                        onChange={handleChange}
+                        value={values.email || ''}
                     />
                 </div>
-                <div className={styles.inputForm}>
+                <div className={[styles.inputForm, errors.password && styles.errorInput].join(' ')}>
                     <input
                         type="password"
                         placeholder="Password"
                         name="password"
-                        onChange={handlerInputChange}
-                        value={input.password}
+                        onChange={handleChange}
+                        value={values.password || ''}
                     />
                 </div>
-                <button type="submit" onClick={handlerBtnCLick}>
-                    Register
-                </button>
+                <button type="submit">Register</button>
             </form>
         </div>
     )
