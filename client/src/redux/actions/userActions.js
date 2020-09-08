@@ -1,4 +1,4 @@
-import { SET_APP } from './types'
+import { SET_USER } from './types'
 
 import api from '../../utils/functions/axios'
 
@@ -9,7 +9,7 @@ export function registerUser(name, password) {
                 name,
                 password,
             })
-            dispatch({ type: SET_APP, payload: res.data.userId })
+            dispatch({ type: SET_USER, payload: res.data })
         } catch (error) {
             alert('Error')
         }
