@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 5000
 app.use(cors())
 app.use(express.json())
 
+//routes
+app.use('/api/user', require('./routes/api/user.routes'))
+
 //start server
 async function start() {
     try {
