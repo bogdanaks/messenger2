@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
+import { Alert } from '../../components/Alert/Alert'
+
 import styles from './styles.module.scss'
 import { validations } from '../../utils/functions/validations'
 import { useForm } from '../../utils/hooks/useForm'
@@ -16,6 +18,7 @@ export const Register = () => {
     }
     return (
         <div className={styles.authWrapper}>
+            <Alert />
             <h2>Register</h2>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={[styles.inputForm, errors.name && styles.errorInput].join(' ')}>
