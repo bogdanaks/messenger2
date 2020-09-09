@@ -18,7 +18,11 @@ app.use('/api/users', require('./routes/api/user.routes'))
 async function start() {
     try {
         await mongoose
-            .connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+            .connect(process.env.DB_URL, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useCreateIndex: true,
+            })
             .then((res) => console.log(`Mongo start success`))
             .catch((err) => console.log(`Mongo error: ${err}`))
         await server.listen(PORT, () => console.log(`Server is running on port: ${PORT}`))
