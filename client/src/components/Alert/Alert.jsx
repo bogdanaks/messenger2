@@ -1,15 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import styles from './styles.module.scss'
 
-export const Alert = ({ text, type }) => {
-    if (text) {
+export const Alert = () => {
+    const alert = useSelector((state) => state.app.alert)
+    if (alert.code) {
         return (
             <div className={styles.alertWrapper}>
-                <span>{text}</span>
+                <span>{alert.message}</span>
             </div>
         )
     } else {
-        return <></>
+        return ''
     }
 }
