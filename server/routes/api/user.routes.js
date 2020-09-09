@@ -4,11 +4,10 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 // Import Verify middleware
-const verifyJwt = require('../../middleware/verifyJwt')
+const verifyToken = require('../../middleware/verifyJwt')
 
 // Import Users Model
 const Users = require('../../models/Users.model')
-const verifyToken = require('../../middleware/verifyJwt')
 
 /*
 @route   POST api/users/
@@ -30,11 +29,9 @@ router.post('/', async (req, res) => {
         const currentUser = await Users.findOne({ name: newUser.name })
 
         // Get token
-        const token = jwt.sign({ id: currentUser._id }, process.env.SECRET_KEY, {
-            expiresIn: 2592000, // 30 days
-        })
+        const token = jwt.sign({ id: currentUser._id }, process.env.SECRET_KEY)
 
-        return res.status(201).send({ id: currentUser._id, name: newUser.name, token })
+        return res.status(201).send({ _id: currentUser._id, name: newUser.name, token })
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
@@ -56,10 +53,8 @@ router.post('/login', async (req, res) => {
         if (!validPassword) return res.status(401).send({ message: 'Invalid password' })
 
         // Get token
-        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-            expiresIn: 2592000, // 30 days
-        })
-        return res.status(200).send({ id: user._id, name: user.name, token })
+        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY)
+        return res.status(200).send({ _id: user._id, name: user.name, token })
     } catch (err) {
         return res.status(400).send({ message: 'Server error: ' + err })
     }
