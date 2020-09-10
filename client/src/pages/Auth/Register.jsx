@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { Alert } from '../../components/Alert/Alert'
 
 import styles from './styles.module.scss'
-import { validations } from '../../utils/functions/validations'
+import { validations } from '../../utils/helpers/validations'
 import { useForm } from '../../utils/hooks/useForm'
 
 import { registerUser } from '../../redux/actions/userActions'
