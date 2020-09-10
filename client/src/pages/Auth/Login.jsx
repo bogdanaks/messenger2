@@ -1,15 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { Alert } from '../../components/Alert/Alert'
 
 import styles from './styles.module.scss'
 import { useForm } from '../../utils/hooks/useForm'
 
+import { loginUser } from '../../redux/actions/userActions'
+
 export const Login = () => {
+    const dispatch = useDispatch()
     const { errors, values, handleSubmit, handleChange } = useForm(callback)
     function callback() {
-        console.log(values)
+        dispatch(loginUser(values.name, values.password))
     }
     return (
         <div className={styles.authWrapper}>
