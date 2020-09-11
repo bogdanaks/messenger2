@@ -12,7 +12,7 @@ export function registerUser(name, password, history) {
                 JSON.stringify({ _id: res.data._id, name: res.data.name, token: res.data.token }),
             )
             dispatch({ type: SET_USER, payload: { _id: res.data._id, name: res.data.name } })
-            history.push('/users')
+            history.push('/')
         } catch (error) {
             dispatch(setAlert(error.response.status, error.response.data.message))
             setTimeout(() => {
@@ -30,7 +30,7 @@ export function loginUser(name, password, history) {
                 JSON.stringify({ _id: res.data._id, name: res.data.name, token: res.data.token }),
             )
             dispatch({ type: SET_USER, payload: { _id: res.data._id, name: res.data.name } })
-            history.push('/users')
+            history.push('/')
         } catch (error) {
             dispatch(setAlert(error.response.status, error.response.data.message))
             setTimeout(() => {
