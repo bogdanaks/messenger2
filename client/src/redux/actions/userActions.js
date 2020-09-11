@@ -1,12 +1,9 @@
-import { history } from '../../utils/helpers/history'
-
 import { SET_USER } from './types'
 
 import api from '../../utils/helpers/axios'
-// import { authHeader } from '../../utils/helpers/authHeader'
 import { setAlert, clearAlert } from './appActions'
 
-export function registerUser(name, password) {
+export function registerUser(name, password, history) {
     return async (dispatch) => {
         try {
             const res = await api.post('/api/users', { name, password })
@@ -24,7 +21,7 @@ export function registerUser(name, password) {
         }
     }
 }
-export function loginUser(name, password) {
+export function loginUser(name, password, history) {
     return async (dispatch) => {
         try {
             const res = await api.post('/api/users/login', { name, password })
