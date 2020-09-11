@@ -1,4 +1,4 @@
-import { SET_ALERT, CLEAR_ALERT } from '../actions/types'
+import { SHOW_ALERT, HIDE_ALERT } from '../actions/types'
 
 const initialState = {
     alert: {
@@ -9,9 +9,9 @@ const initialState = {
 
 export const appReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_ALERT:
+        case SHOW_ALERT:
             return { ...state, alert: { ...action.payload } }
-        case CLEAR_ALERT:
+        case HIDE_ALERT:
             return { ...state, alert: { ...initialState.alert } }
         default:
             return state
