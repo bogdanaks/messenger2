@@ -1,7 +1,7 @@
 import { SET_USER } from './types'
 
 import api from '../../utils/helpers/axios'
-import { setAlert, clearAlert } from './appActions'
+import { showAlert, hideAlert } from './appActions'
 
 export function registerUser(name, password, history) {
     return async (dispatch) => {
@@ -14,9 +14,9 @@ export function registerUser(name, password, history) {
             dispatch({ type: SET_USER, payload: { _id: res.data._id, name: res.data.name } })
             history.push('/')
         } catch (error) {
-            dispatch(setAlert(error.response.status, error.response.data.message))
+            dispatch(showAlert(error.response.status, error.response.data.message))
             setTimeout(() => {
-                dispatch(clearAlert())
+                dispatch(hideAlert())
             }, 2000)
         }
     }
@@ -32,9 +32,9 @@ export function loginUser(name, password, history) {
             dispatch({ type: SET_USER, payload: { _id: res.data._id, name: res.data.name } })
             history.push('/')
         } catch (error) {
-            dispatch(setAlert(error.response.status, error.response.data.message))
+            dispatch(showAlert(error.response.status, error.response.data.message))
             setTimeout(() => {
-                dispatch(clearAlert())
+                dispatch(hideAlert())
             }, 2000)
         }
     }
