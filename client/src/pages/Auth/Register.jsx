@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { Alert } from '../../components/Alert/Alert'
@@ -12,9 +12,10 @@ import { registerUser } from '../../redux/actions/userActions'
 
 export const Register = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const { errors, values, handleSubmit, handleChange } = useForm(callback, validations)
     function callback() {
-        dispatch(registerUser(values.name, values.password))
+        dispatch(registerUser(values.name, values.password, history))
     }
     return (
         <div className={styles.authWrapper}>
