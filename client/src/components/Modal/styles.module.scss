@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     .modalBlock {
-        width: 40%;
+        width: 90%;
         height: 40%;
         background-color: #2d445c;
         border-radius: 5px;
@@ -74,5 +74,15 @@
                 }
             }
         }
+    }
+}
+@media (min-width: 767px) {
+    .modalBlock {
+        width: 50% !important;
+    }
+}
+@media (min-width: 991px) {
+    .modalBlock {
+        width: 40% !important;
     }
 }
