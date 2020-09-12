@@ -1,5 +1,6 @@
 import { SHOW_ALERT, HIDE_ALERT, SHOW_MODAL, HIDE_MODAL } from './types'
 
+// Alert actions
 export function showAlert(code, message) {
     return {
         type: SHOW_ALERT,
@@ -9,10 +10,12 @@ export function showAlert(code, message) {
 export function hideAlert() {
     return { type: HIDE_ALERT }
 }
-export function showModal(code, message) {
+
+// Modal actions
+export function showModal(header, text) {
     return {
         type: SHOW_MODAL,
-        payload: { code, message },
+        payload: { visible: true, header, text },
     }
 }
 export function hideModal() {
