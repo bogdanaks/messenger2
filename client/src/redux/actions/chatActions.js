@@ -1,13 +1,17 @@
 import { NEW_CHAT } from './types'
 
-import { showAlert, hideAlert } from './appActions'
+import api from '../../utils/helpers/axios'
+import { authHeader } from '../../utils/helpers/authHeader'
+import { showAlert, hideAlert, hideModal } from './appActions'
 
 export function createChat(name, history) {
     return async (dispatch) => {
         try {
-            const res = await api.post('/api/chats', { name, password })
-            dispatch({ type: NEW_CHAT, payload: { _id: res.data._id, name: res.data.name } })
-            history.push('/chats')
+            const userId = JSON.parse(localStorage.getItem('user'))._id
+            const res = await api.post('/api/chats', { name, userId }, { headers: authHeader() })
+            dispatch({ type: NEW_CHAT, payload: { id: res.data.id, name: res.data.name } })
+            history.push('/chats/' + res.data.id)
+            dispatch(hideModal())
         } catch (error) {
             dispatch(showAlert(error.response.status, error.response.data.message))
             setTimeout(() => {
