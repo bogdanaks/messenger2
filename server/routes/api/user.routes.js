@@ -3,11 +3,8 @@ const router = Router()
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
-// Import Verify middleware
-const verifyToken = require('../../middleware/verifyJwt')
-
-// Import Users Model
-const Users = require('../../models/Users.model')
+const verifyToken = require('../../middleware/verifyJwt') // Import Verify middleware
+const Users = require('../../models/Users.model') // Import Users Model
 
 /*
 @route   POST api/users/
@@ -25,13 +22,13 @@ router.post('/', async (req, res) => {
             name: req.body.name,
             password: bcrypt.hashSync(req.body.password, 10),
         })
-        await newUser.save()
-        const currentUser = await Users.findOne({ name: newUser.name })
+        await newUser.save((err, user) => {
+            if (err) return res.status(409).send({ message: 'Save error: ' + err })
 
-        // Get token
-        const token = jwt.sign({ id: currentUser._id }, process.env.SECRET_KEY)
-
-        return res.status(201).send({ _id: currentUser._id, name: newUser.name, token })
+            // Get token
+            const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY)
+            return res.status(201).send({ _id: user._id, name: user.name, token })
+        })
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
