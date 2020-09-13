@@ -13,6 +13,7 @@ app.use(express.json())
 
 //routes
 app.use('/api/users', require('./routes/api/user.routes'))
+app.use('/api/chats', require('./routes/api/chat.routes'))
 
 //start server
 async function start() {
