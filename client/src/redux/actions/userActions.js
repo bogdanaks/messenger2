@@ -8,7 +8,7 @@ export function registerUser(name, password, history) {
         try {
             const res = await api.post('/api/users', { name, password })
             localStorage.setItem(
-                'token',
+                'user',
                 JSON.stringify({ _id: res.data._id, name: res.data.name, token: res.data.token }),
             )
             dispatch({ type: SET_USER, payload: { _id: res.data._id, name: res.data.name } })
