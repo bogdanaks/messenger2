@@ -19,7 +19,7 @@ router.post('/', verifyToken, async (req, res) => {
         })
         await newChat.save((err, chat) => {
             if (err) return res.status(409).send({ message: 'Save error: ' + err })
-            return res.status(201).send({ id: chat._id, name: chat.name })
+            return res.status(201).send(chat)
         })
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
