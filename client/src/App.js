@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import { Main, Login, Register } from './pages'
 import { Modal } from './components/Modal/Modal'
@@ -14,10 +14,10 @@ export const App = () => {
                 <Alert />
                 <Modal />
                 <Switch>
-                    <PrivateRoute path="/" component={Main} exact />
                     <IsAuthRoute path="/login" component={Login} exact />
                     <IsAuthRoute path="/register" component={Register} exact />
-                    <Route path="/users" component={Main} />
+                    <PrivateRoute path="/chats/:id" component={Main} />
+                    <PrivateRoute path="/" component={Main} />
                 </Switch>
             </Router>
         </div>
