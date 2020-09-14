@@ -1,4 +1,4 @@
-import { INIT_CHAT, NEW_CHAT } from './types'
+import { INIT_CHAT, NEW_CHAT, SET_ACTIVE_CHAT } from './types'
 
 import api from '../../utils/helpers/axios'
 import { authHeader } from '../../utils/helpers/authHeader'
@@ -33,5 +33,12 @@ export function createChat(name, history) {
                 dispatch(hideAlert())
             }, 2000)
         }
+    }
+}
+
+export function setActiveChat(chat) {
+    return {
+        type: SET_ACTIVE_CHAT,
+        payload: chat,
     }
 }
