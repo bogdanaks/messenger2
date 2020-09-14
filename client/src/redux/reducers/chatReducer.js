@@ -1,4 +1,4 @@
-import { NEW_CHAT } from './types'
+import { INIT_CHAT, NEW_CHAT } from '../actions/types'
 
 const initialState = {
     chats: [],
@@ -6,8 +6,10 @@ const initialState = {
 
 export const chatReducer = (state = initialState, action) => {
     switch (action.type) {
-        case NEW_CHAT:
+        case INIT_CHAT:
             return { ...state, chats: action.payload }
+        case NEW_CHAT:
+            return { ...state, chats: state.chats.concat(action.payload) }
         default:
             return state
     }
