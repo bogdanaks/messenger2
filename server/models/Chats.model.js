@@ -11,6 +11,25 @@ const ChatsSchema = new Schema(
             type: String,
             required: true,
         },
+        users: {
+            type: Array,
+        },
+        messages: [
+            {
+                _id: {
+                    type: Schema.ObjectId,
+                    auto: true,
+                },
+                senderId: {
+                    type: String,
+                    required: true,
+                },
+                text: {
+                    type: String,
+                    required: true,
+                },
+            },
+        ],
     },
     { timestamps: true },
 )
