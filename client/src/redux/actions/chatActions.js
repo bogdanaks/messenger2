@@ -24,8 +24,9 @@ export function createChat(name, history) {
         try {
             const userId = JSON.parse(localStorage.getItem('user'))._id
             const res = await api.post('/api/chats', { name, userId }, { headers: authHeader() })
-            dispatch({ type: NEW_CHAT, payload: { id: res.data.id, name: res.data.name } })
-            history.push('/chats/' + res.data.id)
+            dispatch({ type: NEW_CHAT, payload: { ...res.data } })
+            dispatch(setActiveChat(res.data))
+            history.push('/chats/' + res.data._id)
             dispatch(hideModal())
         } catch (error) {
             dispatch(showAlert(error.response.status, error.response.data.message))
