@@ -27,12 +27,16 @@
         box-sizing: border-box;
         ul {
             width: 100%;
+            a {
+                text-decoration: none;
+            }
             li {
                 display: flex;
                 flex-direction: row;
                 width: 100%;
                 padding: 5px 10px;
                 box-sizing: border-box;
+                transition: all 0.2s ease-in-out;
                 .userImg {
                     width: 50px;
                     height: 50px;
@@ -79,6 +83,9 @@
                     span {
                         color: rgb(245, 245, 245);
                     }
+                }
+                &:hover {
+                    background-color: rgb(43, 82, 120);
                 }
             }
         }
