@@ -8,3 +8,4 @@ export const SET_USER = 'USER/SET_USER'
 
 export const INIT_CHAT = 'CHAT/INIT_CHAT'
 export const NEW_CHAT = 'CHAT/NEW_CHAT'
+export const SET_ACTIVE_CHAT = 'CHAT/SET_ACTIVE_CHAT'
