@@ -8,8 +8,8 @@ export function initChat() {
     return async (dispatch) => {
         try {
             // const userId = JSON.parse(localStorage.getItem('user'))._id
-            const res = await api.get(`/api/chats`, {}, { headers: authHeader() })
-            dispatch({ type: INIT_CHAT, payload: res })
+            const res = await api.get(`/api/chats`, { headers: authHeader() })
+            dispatch({ type: INIT_CHAT, payload: res.data })
         } catch (error) {
             dispatch(showAlert(error.response.status, error.response.data.message))
             setTimeout(() => {
