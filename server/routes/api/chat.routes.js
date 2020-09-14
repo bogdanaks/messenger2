@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const router = Router()
 
-const verifyToken = require('../../middleware/verifyJwt') // Import Verify middleware
-const Chats = require('../../models/Chats.model') // Import Chats Model
+const verifyToken = require('../../middleware/verifyJwt')
+const Chats = require('../../models/Chats.model')
 
 /*
 @route   POST api/chats/
@@ -15,11 +15,27 @@ router.post('/', verifyToken, async (req, res) => {
         const newChat = new Chats({
             name: req.body.name,
             creatorId: req.body.userId,
+            users: req.body.userId,
         })
         await newChat.save((err, chat) => {
-            if (err) res.status(409).send({ message: 'Save error: ' + err })
+            if (err) return res.status(409).send({ message: 'Save error: ' + err })
             return res.status(201).send({ id: chat._id, name: chat.name })
         })
+    } catch (err) {
+        return res.status(500).send({ message: 'Server error: ' + err })
+    }
+})
+
+/*
+@route          GET api/chats/
+@queryParams    userId
+@desc           Get all chats
+@access         Private
+*/
+router.get('/', verifyToken, async (req, res) => {
+    try {
+        const allUsers = await Chats.find()
+        return res.status(200).send(allUsers)
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
