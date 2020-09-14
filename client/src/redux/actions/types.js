@@ -6,4 +6,5 @@ export const HIDE_MODAL = 'MODAL/HIDE_MODAL'
 
 export const SET_USER = 'USER/SET_USER'
 
+export const INIT_CHAT = 'CHAT/INIT_CHAT'
 export const NEW_CHAT = 'CHAT/NEW_CHAT'
