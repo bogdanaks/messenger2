@@ -81,6 +81,15 @@
         }
     }
 }
+.emptyChat {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h3 {
+        color: #7f91a4;
+    }
+}
 @media (max-width: 767px) {
     .dialogWrapper {
         width: 100%;
