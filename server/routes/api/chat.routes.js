@@ -34,8 +34,13 @@ router.post('/', verifyToken, async (req, res) => {
 */
 router.get('/', verifyToken, async (req, res) => {
     try {
-        const allUsers = await Chats.find()
-        return res.status(200).send(allUsers)
+        let allChats
+        if (req.query.userId) {
+            allChats = await Chats.find({ users: req.query.userId })
+        } else {
+            allChats = await Chats.find()
+        }
+        return res.status(200).send(allChats)
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
