@@ -14,10 +14,14 @@ export function registerUser(name, password, history) {
             dispatch({ type: SET_USER, payload: { _id: res.data._id, name: res.data.name } })
             history.push('/')
         } catch (error) {
-            dispatch(showAlert(error.response.status, error.response.data.message))
-            setTimeout(() => {
-                dispatch(hideAlert())
-            }, 2000)
+            if (error.response) {
+                dispatch(showAlert(error.response.status, error.response.data.message))
+                setTimeout(() => {
+                    dispatch(hideAlert())
+                }, 2000)
+            } else {
+                console.error(error)
+            }
         }
     }
 }
@@ -32,10 +36,14 @@ export function loginUser(name, password, history) {
             dispatch({ type: SET_USER, payload: { _id: res.data._id, name: res.data.name } })
             history.push('/')
         } catch (error) {
-            dispatch(showAlert(error.response.status, error.response.data.message))
-            setTimeout(() => {
-                dispatch(hideAlert())
-            }, 2000)
+            if (error.response) {
+                dispatch(showAlert(error.response.status, error.response.data.message))
+                setTimeout(() => {
+                    dispatch(hideAlert())
+                }, 2000)
+            } else {
+                console.error(error)
+            }
         }
     }
 }
