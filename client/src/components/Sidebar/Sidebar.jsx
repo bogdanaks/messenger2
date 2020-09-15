@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
@@ -8,10 +8,14 @@ import { faPlusSquare } from '@fortawesome/free-regular-svg-icons'
 import styles from './styles.module.scss'
 
 import { showModal } from '../../redux/actions/appActions'
+import { setActiveChat } from '../../redux/actions/chatActions'
 
 export const Sidebar = () => {
     const dispatch = useDispatch()
     const history = useHistory()
+    const handleBtnChats = () => {
+        dispatch(setActiveChat({}))
+    }
     const handleBtnNewChat = () => {
         dispatch(showModal('New Chat', 'Enter a name for the new chat'))
     }
@@ -22,10 +26,12 @@ export const Sidebar = () => {
     return (
         <div className={styles.sidebarWrapper}>
             <ul>
-                <li className={styles.active}>
-                    <FontAwesomeIcon icon={faComments} />
-                    <span>Chats</span>
-                </li>
+                <Link to="/" onClick={handleBtnChats}>
+                    <li className={styles.active}>
+                        <FontAwesomeIcon icon={faComments} />
+                        <span>Chats</span>
+                    </li>
+                </Link>
                 <li onClick={handleBtnNewChat}>
                     <FontAwesomeIcon icon={faPlusSquare} />
                     <span>New</span>
