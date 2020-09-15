@@ -10,12 +10,13 @@ import styles from './styles.module.scss'
 import { Message } from '../Message/Message'
 import { ChatSettings } from '../ChatSettings/ChatSettings'
 
-export const Dialog = () => {
+export const Dialog = ({ chats }) => {
     const [chatSettigs, setChatSettings] = React.useState(false)
     const activeChat = useSelector((state) => state.chat.activeChat)
     const handleSettingsChat = () => {
         setChatSettings(!chatSettigs)
     }
+
     if (Object.keys(activeChat).length === 0) {
         return (
             <div className={styles.emptyChat}>
