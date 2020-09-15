@@ -37,7 +37,7 @@ export const Dialog = () => {
                     <FontAwesomeIcon icon={faEllipsisV} />
                 </div>
                 {chatSettigs && (
-                    <ChatSettings chatId={activeChat._id} setChatSettings={setChatSettings} />
+                    <ChatSettings chat={activeChat} setChatSettings={setChatSettings} />
                 )}
             </div>
             <div className={styles.content}>
