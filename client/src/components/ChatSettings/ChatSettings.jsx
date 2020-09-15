@@ -4,13 +4,16 @@ import { useDispatch } from 'react-redux'
 
 import styles from './styles.module.scss'
 
-import { deleteChat } from '../../redux/actions/chatActions'
+import { deleteChat, leaveChat } from '../../redux/actions/chatActions'
 
-export const ChatSettings = ({ chatId, setChatSettings }) => {
+export const ChatSettings = ({ chat, setChatSettings }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const divRef = React.useRef()
     const handleLeaveChat = (chatId) => {
+        dispatch(leaveChat(chatId, history))
+    }
+    const handleDeleteChat = (chatId) => {
         dispatch(deleteChat(chatId, history))
     }
     React.useEffect(() => {
@@ -29,7 +32,11 @@ export const ChatSettings = ({ chatId, setChatSettings }) => {
     return (
         <div className={styles.wrapper} ref={divRef}>
             <ul>
-                <li onClick={() => handleLeaveChat(chatId)}>Покинуть чат</li>
+                {chat.creatorId === JSON.parse(localStorage.getItem('user'))._id ? (
+                    <li onClick={() => handleDeleteChat(chat._id)}>Удалить чат</li>
+                ) : (
+                    <li onClick={() => handleLeaveChat(chat._id)}>Покинуть чат</li>
+                )}
             </ul>
         </div>
     )
