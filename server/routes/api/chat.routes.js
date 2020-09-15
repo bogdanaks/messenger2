@@ -42,7 +42,7 @@ router.get('/', verifyToken, async (req, res) => {
 })
 
 /*
-@route          DELETE api/chats
+@route          DELETE api/chats/:chatId
 @desc           Delete chat by _id
 @access         Private
 */
@@ -53,9 +53,24 @@ router.delete('/:chatId', verifyToken, async (req, res) => {
         if (chat.creatorId !== userId)
             return res.status(403).send({ message: 'You are not the creator of this chat' })
 
-        chat.remove()
+        await chat.remove()
         return res.status(200).send(chat._id)
-        // code
+    } catch (err) {
+        return res.status(500).send({ message: 'Server error: ' + err })
+    }
+})
+
+/*
+@route          DELETE api/chats/:chatId/users/:userId
+@desc           Delete user from chat by chatId
+@access         Private
+*/
+router.delete('/:chatId/users/:userId', verifyToken, async (req, res) => {
+    try {
+        const chat = await Chats.findById(req.params.chatId)
+        await chat.users.pull(req.params.userId)
+        await chat.save()
+        return res.status(200).send(chat._id)
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
