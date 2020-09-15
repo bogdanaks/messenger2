@@ -1,18 +1,25 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
 
 import styles from './styles.module.scss'
 
 import { DialogsItem } from './DialogsItem'
 
-import { setActiveChat } from '../../redux/actions/chatActions'
+import { setActiveChat, initChats } from '../../redux/actions/chatActions'
 
-export const DialogsList = ({ chats }) => {
+export const DialogsList = () => {
     const dispatch = useDispatch()
+    const { id } = useParams()
+    const chats = useSelector((state) => state.chat.chats)
+
     const handleChatCLick = (item) => {
         dispatch(setActiveChat(item))
     }
+    React.useEffect(() => {
+        dispatch(initChats(id && id))
+        // eslint-disable-next-line
+    }, [])
     return (
         <div className={styles.dialogsWrapper}>
             <div className={styles.find}>
