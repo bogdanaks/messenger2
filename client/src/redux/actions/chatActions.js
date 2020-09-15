@@ -7,8 +7,8 @@ import { showAlert, hideAlert, hideModal } from './appActions'
 export function initChats(chatId) {
     return async (dispatch) => {
         try {
-            // const userId = JSON.parse(localStorage.getItem('user'))._id
-            const res = await api.get(`/api/chats`, { headers: authHeader() })
+            const userId = JSON.parse(localStorage.getItem('user'))._id
+            const res = await api.get(`/api/chats`, { headers: authHeader(), params: { userId } })
             dispatch({ type: INIT_CHAT, payload: res.data })
 
             // If the argument chat id is passed, then we set it as an active chat
@@ -17,11 +17,14 @@ export function initChats(chatId) {
                 dispatch(setActiveChat({ ...activeChat[0] }))
             }
         } catch (error) {
-            console.log(error)
-            dispatch(showAlert(error.response.status, error.response.data.message))
-            setTimeout(() => {
-                dispatch(hideAlert())
-            }, 2000)
+            if (error.response) {
+                dispatch(showAlert(error.response.status, error.response.data.message))
+                setTimeout(() => {
+                    dispatch(hideAlert())
+                }, 2000)
+            } else {
+                console.error(error)
+            }
         }
     }
 }
@@ -36,10 +39,14 @@ export function createChat(name, history) {
             history.push('/chats/' + res.data._id)
             dispatch(hideModal())
         } catch (error) {
-            dispatch(showAlert(error.response.status, error.response.data.message))
-            setTimeout(() => {
-                dispatch(hideAlert())
-            }, 2000)
+            if (error.response) {
+                dispatch(showAlert(error.response.status, error.response.data.message))
+                setTimeout(() => {
+                    dispatch(hideAlert())
+                }, 2000)
+            } else {
+                console.error(error)
+            }
         }
     }
 }
@@ -52,11 +59,14 @@ export function deleteChat(chatId, history) {
             dispatch({ type: DELETE_CHAT, payload: res.data })
             dispatch(setActiveChat({}))
         } catch (error) {
-            console.log(error)
-            dispatch(showAlert(error.response.status, error.response.data.message))
-            setTimeout(() => {
-                dispatch(hideAlert())
-            }, 2000)
+            if (error.response) {
+                dispatch(showAlert(error.response.status, error.response.data.message))
+                setTimeout(() => {
+                    dispatch(hideAlert())
+                }, 2000)
+            } else {
+                console.error(error)
+            }
         }
     }
 }
@@ -72,11 +82,14 @@ export function leaveChat(chatId, history) {
             dispatch({ type: DELETE_CHAT, payload: res.data })
             dispatch(setActiveChat({}))
         } catch (error) {
-            console.log(error)
-            dispatch(showAlert(error.response.status, error.response.data.message))
-            setTimeout(() => {
-                dispatch(hideAlert())
-            }, 2000)
+            if (error.response) {
+                dispatch(showAlert(error.response.status, error.response.data.message))
+                setTimeout(() => {
+                    dispatch(hideAlert())
+                }, 2000)
+            } else {
+                console.error(error)
+            }
         }
     }
 }
