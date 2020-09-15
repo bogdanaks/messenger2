@@ -2,17 +2,18 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import styles from './styles.module.scss'
-import user from '../../assets/user.png'
 
-export const DialogsItem = ({ _id, name, updatedAt }) => {
+export const DialogsItem = ({ _id, name, updatedAt, color }) => {
     const { id } = useParams()
     return (
         <li className={id === _id ? styles.active : ''}>
-            <div className={styles.userImg}>
-                <img src={user} alt="User" />
+            <div className={styles.chatImg}>
+                <div className={styles.letter} style={{ backgroundColor: color || '#7965c1' }}>
+                    <span>{name[0]}</span>
+                </div>
             </div>
-            <div className={styles.userInfo}>
-                <div className={styles.userInfo__header}>
+            <div className={styles.chatInfo}>
+                <div className={styles.header}>
                     <h5>{name}</h5>
                     <span>
                         {new Date(updatedAt).getHours()}:{new Date(updatedAt).getMinutes()}
