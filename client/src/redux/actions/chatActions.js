@@ -1,4 +1,4 @@
-import { INIT_CHAT, NEW_CHAT, SET_ACTIVE_CHAT } from './types'
+import { INIT_CHAT, NEW_CHAT, DELETE_CHAT, SET_ACTIVE_CHAT } from './types'
 
 import api from '../../utils/helpers/axios'
 import { authHeader } from '../../utils/helpers/authHeader'
@@ -29,6 +29,23 @@ export function createChat(name, history) {
             history.push('/chats/' + res.data._id)
             dispatch(hideModal())
         } catch (error) {
+            dispatch(showAlert(error.response.status, error.response.data.message))
+            setTimeout(() => {
+                dispatch(hideAlert())
+            }, 2000)
+        }
+    }
+}
+
+export function deleteChat(chatId, history) {
+    return async (dispatch) => {
+        try {
+            const res = await api.delete(`/api/chats/${chatId}`, { headers: authHeader() })
+            history.push('/')
+            dispatch({ type: DELETE_CHAT, payload: res.data })
+            dispatch(setActiveChat({}))
+        } catch (error) {
+            console.log(error)
             dispatch(showAlert(error.response.status, error.response.data.message))
             setTimeout(() => {
                 dispatch(hideAlert())
