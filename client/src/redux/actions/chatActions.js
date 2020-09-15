@@ -4,13 +4,20 @@ import api from '../../utils/helpers/axios'
 import { authHeader } from '../../utils/helpers/authHeader'
 import { showAlert, hideAlert, hideModal } from './appActions'
 
-export function initChat() {
+export function initChats(chatId) {
     return async (dispatch) => {
         try {
             // const userId = JSON.parse(localStorage.getItem('user'))._id
             const res = await api.get(`/api/chats`, { headers: authHeader() })
             dispatch({ type: INIT_CHAT, payload: res.data })
+
+            // If the argument chat id is passed, then we set it as an active chat
+            if (chatId) {
+                const activeChat = res.data.filter((chat) => chat._id === chatId)
+                dispatch(setActiveChat({ ...activeChat[0] }))
+            }
         } catch (error) {
+            console.log(error)
             dispatch(showAlert(error.response.status, error.response.data.message))
             setTimeout(() => {
                 dispatch(hideAlert())
