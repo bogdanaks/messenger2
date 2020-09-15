@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const router = Router()
+const jwt = require('jsonwebtoken')
 
 const verifyToken = require('../../middleware/verifyJwt')
 const Chats = require('../../models/Chats.model')
@@ -10,7 +11,6 @@ const Chats = require('../../models/Chats.model')
 @access  Private
 */
 router.post('/', verifyToken, async (req, res) => {
-    // Add new chat in database
     try {
         const newChat = new Chats({
             name: req.body.name,
@@ -36,6 +36,26 @@ router.get('/', verifyToken, async (req, res) => {
     try {
         const allUsers = await Chats.find()
         return res.status(200).send(allUsers)
+    } catch (err) {
+        return res.status(500).send({ message: 'Server error: ' + err })
+    }
+})
+
+/*
+@route          DELETE api/chats
+@desc           Delete chat by _id
+@access         Private
+*/
+router.delete('/:chatId', verifyToken, async (req, res) => {
+    try {
+        const userId = jwt.decode(req.headers.authorization.split(' ')[1]).id
+        const chat = await Chats.findById(req.params.chatId)
+        if (chat.creatorId !== userId)
+            return res.status(403).send({ message: 'You are not the creator of this chat' })
+
+        chat.remove()
+        return res.status(200).send(chat._id)
+        // code
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
