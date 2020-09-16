@@ -29,11 +29,15 @@ export function initChats(chatId) {
     }
 }
 
-export function createChat(name, history) {
+export function createChat(name, color, history) {
     return async (dispatch) => {
         try {
             const userId = JSON.parse(localStorage.getItem('user'))._id
-            const res = await api.post('/api/chats', { name, userId }, { headers: authHeader() })
+            const res = await api.post(
+                '/api/chats',
+                { name, userId, color },
+                { headers: authHeader() },
+            )
             dispatch({ type: NEW_CHAT, payload: { ...res.data } })
             dispatch(setActiveChat(res.data))
             history.push('/chats/' + res.data._id)
