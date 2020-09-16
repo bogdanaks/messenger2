@@ -12,10 +12,10 @@ export function hideAlert() {
 }
 
 // Modal actions
-export function showModal(header, text) {
+export function showModal(type, header, text) {
     return {
         type: SHOW_MODAL,
-        payload: { visible: true, header, text },
+        payload: { visible: true, type, header, text },
     }
 }
 export function hideModal() {
