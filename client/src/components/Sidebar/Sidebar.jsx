@@ -17,7 +17,7 @@ export const Sidebar = () => {
         dispatch(setActiveChat({}))
     }
     const handleBtnNewChat = () => {
-        dispatch(showModal('New Chat', 'Enter a name for the new chat'))
+        dispatch(showModal('New Chat', 'Enter a name and select a color for a new chat'))
     }
     const handleBtnExit = () => {
         localStorage.removeItem('user')
