@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import styles from './styles.module.scss'
-import { validations } from '../../utils/helpers/validations'
+import { validateAuth } from '../../utils/helpers/validateAuth'
 import { useForm } from '../../utils/hooks/useForm'
 
 import { registerUser } from '../../redux/actions/userActions'
@@ -11,7 +11,7 @@ import { registerUser } from '../../redux/actions/userActions'
 export const Register = () => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const { errors, values, handleSubmit, handleChange } = useForm(callback, validations)
+    const { errors, values, handleSubmit, handleChange } = useForm(callback, validateAuth)
     function callback() {
         dispatch(registerUser(values.name, values.password, history))
     }
