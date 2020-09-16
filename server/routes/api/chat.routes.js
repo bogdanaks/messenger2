@@ -40,6 +40,8 @@ router.get('/', verifyToken, async (req, res) => {
         let allChats
         if (req.query.userId) {
             allChats = await Chats.find({ users: req.query.userId })
+        } else if (req.query.inviteId) {
+            allChats = await Chats.findOne({ inviteId: req.query.inviteId })
         } else {
             allChats = await Chats.find()
         }
@@ -63,6 +65,25 @@ router.delete('/:chatId', verifyToken, async (req, res) => {
 
         await chat.remove()
         return res.status(200).send(chat._id)
+    } catch (err) {
+        return res.status(500).send({ message: 'Server error: ' + err })
+    }
+})
+
+/*
+@route          PUT api/chats/:chatId/users/:userId
+@desc           Add user in chat
+@access         Private
+*/
+router.put('/:chatId/users/:userId', verifyToken, async (req, res) => {
+    try {
+        const chat = await Chats.findById(req.params.chatId)
+        if (chat.users.includes(req.params.userId))
+            return res.status(409).send({ message: 'You are already in the chat' })
+
+        await chat.users.push(req.params.userId)
+        await chat.save()
+        return res.status(200).send(chat)
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
