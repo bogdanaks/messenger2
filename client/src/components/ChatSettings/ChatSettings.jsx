@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 
 import styles from './styles.module.scss'
 
+import { showModal } from '../../redux/actions/appActions'
 import { deleteChat, leaveChat } from '../../redux/actions/chatActions'
 
 export const ChatSettings = ({ chat, setChatSettings }) => {
@@ -15,6 +16,9 @@ export const ChatSettings = ({ chat, setChatSettings }) => {
     }
     const handleDeleteChat = (chatId) => {
         dispatch(deleteChat(chatId, history))
+    }
+    const handleInviteLink = () => {
+        dispatch(showModal('inviteLink', 'Invite Link', 'This is an invitation link to this chat'))
     }
     React.useEffect(() => {
         function handleClickOutside(event) {
@@ -32,6 +36,7 @@ export const ChatSettings = ({ chat, setChatSettings }) => {
     return (
         <div className={styles.wrapper} ref={divRef}>
             <ul>
+                <li onClick={handleInviteLink}>Инвайт ссылка</li>
                 {chat.creatorId === JSON.parse(localStorage.getItem('user'))._id ? (
                     <li onClick={() => handleDeleteChat(chat._id)}>Удалить чат</li>
                 ) : (
