@@ -12,12 +12,11 @@ const Chats = require('../../models/Chats.model')
 */
 router.post('/', verifyToken, async (req, res) => {
     try {
-        const baseColors = ['#7965c1', '#cb4f87', '#4388b9']
         const newChat = new Chats({
             name: req.body.name,
             creatorId: req.body.userId,
             users: req.body.userId,
-            color: baseColors[Math.floor(Math.random() * 3)],
+            color: req.body.color,
         })
         await newChat.save((err, chat) => {
             if (err) return res.status(409).send({ message: 'Save error: ' + err })
