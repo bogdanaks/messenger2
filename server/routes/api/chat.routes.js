@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const jwt = require('jsonwebtoken')
+const { v4 } = require('uuid')
 
 const verifyToken = require('../../middleware/verifyJwt')
 const Chats = require('../../models/Chats.model')
@@ -17,6 +18,7 @@ router.post('/', verifyToken, async (req, res) => {
             creatorId: req.body.userId,
             users: req.body.userId,
             color: req.body.color,
+            inviteId: v4(),
         })
         await newChat.save((err, chat) => {
             if (err) return res.status(409).send({ message: 'Save error: ' + err })
