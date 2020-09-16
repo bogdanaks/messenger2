@@ -32,6 +32,11 @@ const ChatsSchema = new Schema(
         ],
         color: {
             type: String,
+            required: true,
+        },
+        inviteId: {
+            type: String,
+            required: true,
         },
     },
     { timestamps: true },
