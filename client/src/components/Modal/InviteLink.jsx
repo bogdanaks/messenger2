@@ -1,10 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import styles from './styles.module.scss'
 
 export const InviteLink = () => {
     const [alertCopy, setAlertCopy] = React.useState(false)
     const linkRef = React.useRef()
+    const inviteId = useSelector((state) => state.chat.activeChat.inviteId)
+
     const handleCopyClick = () => {
         linkRef.current.select()
         document.execCommand('copy')
@@ -20,9 +23,7 @@ export const InviteLink = () => {
                     ref={linkRef}
                     className={styles.inviteLink}
                     type="text"
-                    defaultValue={
-                        'http://' + window.location.hostname + ':3000/invite/akwjbk12j3k1j2hv3'
-                    }
+                    defaultValue={'http://' + window.location.hostname + ':3000/invite/' + inviteId}
                 />
                 <button className={styles.inviteBtn} onClick={handleCopyClick}>
                     Copy
