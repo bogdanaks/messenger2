@@ -106,8 +106,8 @@ export function enterChat(chatId, history) {
                 headers: authHeader(),
             })
             console.log(res.data)
-            // await dispatch(initChats(res.data._id))
-            // history.push(`/chats/${res.data._id}`)
+            await dispatch(initChats(res.data._id))
+            history.push(`/chats/${res.data._id}`)
         } catch (error) {
             if (error.response) {
                 dispatch(showAlert(error.response.status, error.response.data.message))
