@@ -16,6 +16,8 @@ export const Modal = () => {
     const history = useHistory()
     const modalRef = React.useRef()
     const [input, setInput] = React.useState('')
+    const [colorNum, setColorNum] = React.useState(0)
+    const colors = ['#7965c1', '#cb4f87', '#4388b9', '#00A876', '#d3a924']
 
     const handleCloseModal = () => {
         dispatch(hideModal())
@@ -35,7 +37,10 @@ export const Modal = () => {
     }, [])
 
     const handleBtnCreate = () => {
-        dispatch(createChat(input, history))
+        dispatch(createChat(input, colors[colorNum], history))
+    }
+    const handleColorClick = (index) => {
+        setColorNum(index)
     }
 
     if (!modal.visible) {
@@ -57,6 +62,20 @@ export const Modal = () => {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                     />
+                    <div className={styles.colors}>
+                        <ul>
+                            {colors.map((color, index) => (
+                                <li
+                                    className={[
+                                        styles.color,
+                                        colorNum === index && styles.active,
+                                    ].join(' ')}
+                                    style={{ backgroundColor: color }}
+                                    onClick={() => handleColorClick(index)}
+                                    key={index}></li>
+                            ))}
+                        </ul>
+                    </div>
                     <button type="submit" onClick={handleBtnCreate}>
                         Create
                     </button>
