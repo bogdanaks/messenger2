@@ -98,6 +98,51 @@ export function leaveChat(chatId, history) {
     }
 }
 
+export function enterChat(chatId, history) {
+    return async (dispatch) => {
+        try {
+            const userId = JSON.parse(localStorage.getItem('user'))._id
+            const res = await api.put(`/api/chats/${chatId}/users/${userId}`, null, {
+                headers: authHeader(),
+            })
+            console.log(res.data)
+            // await dispatch(initChats(res.data._id))
+            // history.push(`/chats/${res.data._id}`)
+        } catch (error) {
+            if (error.response) {
+                dispatch(showAlert(error.response.status, error.response.data.message))
+                setTimeout(() => {
+                    dispatch(hideAlert())
+                }, 2000)
+            } else {
+                console.error(error)
+            }
+        }
+    }
+}
+
+export function getChatByInviteId(inviteId) {
+    return async (dispatch) => {
+        try {
+            const res = await api.get('/api/chats/', {
+                headers: authHeader(),
+                params: { inviteId },
+            })
+            const { _id, name, color } = res.data
+            dispatch(setActiveChat({ _id, name, color }))
+        } catch (error) {
+            if (error.response) {
+                dispatch(showAlert(error.response.status, error.response.data.message))
+                setTimeout(() => {
+                    dispatch(hideAlert())
+                }, 2000)
+            } else {
+                console.error(error)
+            }
+        }
+    }
+}
+
 export function setActiveChat(chat) {
     return {
         type: SET_ACTIVE_CHAT,
