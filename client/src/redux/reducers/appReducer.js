@@ -7,6 +7,7 @@ const initialState = {
     },
     modal: {
         visible: false,
+        type: '',
         header: '',
         text: '',
     },
