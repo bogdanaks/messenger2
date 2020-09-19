@@ -13,8 +13,10 @@ export const InputMessage = ({ chat }) => {
     const { values, handleChange, handleSubmit } = useForm(callback)
     const dispatch = useDispatch()
     function callback() {
-        dispatch(sendMessage(chat._id, values.message))
-        values.message = ''
+        if (values.message) {
+            dispatch(sendMessage(chat._id, values.message))
+            values.message = ''
+        }
     }
     return (
         <div className={styles.content__footer}>
