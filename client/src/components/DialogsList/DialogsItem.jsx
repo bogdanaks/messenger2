@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 
 import { useDate } from '../../utils/hooks/useDate'
 
-export const DialogsItem = ({ _id, name, updatedAt, color }) => {
+export const DialogsItem = ({ _id, name, updatedAt, color, messages }) => {
     const { id } = useParams()
     const { dateFormat } = useDate(updatedAt)
     return (
@@ -20,7 +20,7 @@ export const DialogsItem = ({ _id, name, updatedAt, color }) => {
                     <h5>{name}</h5>
                     <span>{dateFormat}</span>
                 </div>
-                <p>Message last</p>
+                <p>{messages[messages.length - 1].text}</p>
             </div>
         </li>
     )
