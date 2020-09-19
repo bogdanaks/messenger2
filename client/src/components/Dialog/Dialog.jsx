@@ -43,9 +43,9 @@ export const Dialog = () => {
             </div>
             <div className={styles.content}>
                 <div className={styles.content__messages}>
-                    <Message />
-                    <Message me />
-                    <Message />
+                    {activeChat.messages.map((message) => (
+                        <Message key={message._id} message={message} />
+                    ))}
                 </div>
                 <InputMessage chat={activeChat} />
             </div>
