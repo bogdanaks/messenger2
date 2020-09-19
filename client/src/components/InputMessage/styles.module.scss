@@ -37,10 +37,9 @@
                 }
             }
             .iconSend {
-                color: rgb(82, 136, 193);
                 background-color: transparent;
                 border: none;
-                &:hover {
+                svg {
                     color: rgb(82, 136, 193);
                 }
                 &:focus {
