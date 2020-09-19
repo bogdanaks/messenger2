@@ -1,4 +1,4 @@
-import { INIT_CHAT, NEW_CHAT, DELETE_CHAT, SET_ACTIVE_CHAT } from '../actions/types'
+import { INIT_CHAT, NEW_CHAT, DELETE_CHAT, SET_ACTIVE_CHAT, ADD_MESSAGE } from '../actions/types'
 
 const initialState = {
     chats: [],
@@ -16,6 +16,14 @@ export const chatReducer = (state = initialState, action) => {
             return { ...state, chats: res }
         case SET_ACTIVE_CHAT:
             return { ...state, activeChat: action.payload }
+        case ADD_MESSAGE:
+            return {
+                ...state,
+                activeChat: {
+                    ...state.activeChat,
+                    messages: state.activeChat.messages.concat(action.payload),
+                },
+            }
         default:
             return state
     }
