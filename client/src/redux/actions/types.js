@@ -10,3 +10,5 @@ export const INIT_CHAT = 'CHAT/INIT_CHAT'
 export const NEW_CHAT = 'CHAT/NEW_CHAT'
 export const DELETE_CHAT = 'CHAT/DELETE_CHAT'
 export const SET_ACTIVE_CHAT = 'CHAT/SET_ACTIVE_CHAT'
+
+export const ADD_MESSAGE = 'MESSAGE/ADD_MESSAGE'
