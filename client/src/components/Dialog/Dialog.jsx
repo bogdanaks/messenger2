@@ -10,7 +10,7 @@ import { Message } from '../Message/Message'
 import { ChatSettings } from '../ChatSettings/ChatSettings'
 import { InputMessage } from '../InputMessage/InputMessage'
 
-export const Dialog = ({ chats }) => {
+export const Dialog = () => {
     const [chatSettigs, setChatSettings] = React.useState(false)
     const activeChat = useSelector((state) => state.chat.activeChat)
     const handleSettingsChat = () => {
@@ -47,7 +47,7 @@ export const Dialog = ({ chats }) => {
                     <Message me />
                     <Message />
                 </div>
-                <InputMessage />
+                <InputMessage chat={activeChat} />
             </div>
         </div>
     )
