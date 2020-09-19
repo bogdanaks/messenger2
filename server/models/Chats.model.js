@@ -24,10 +24,15 @@ const ChatsSchema = new Schema(
                     type: String,
                     required: true,
                 },
+                senderName: {
+                    type: String,
+                    required: true,
+                },
                 text: {
                     type: String,
                     required: true,
                 },
+                date: { type: Date, default: Date.now },
             },
         ],
         color: {
