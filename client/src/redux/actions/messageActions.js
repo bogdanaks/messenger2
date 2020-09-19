@@ -7,13 +7,13 @@ import { authHeader } from '../../utils/helpers/authHeader'
 export function sendMessage(chatId, text) {
     return async (dispatch) => {
         try {
-            // const { _id: userId, name } = JSON.parse(localStorage.getItem('user'))
+            const { name } = JSON.parse(localStorage.getItem('user'))
             const res = await api.post(
                 `/api/chats/${chatId}/messages`,
-                { text },
+                { text, name },
                 { headers: authHeader() },
             )
-            console.log(res.data)
+            dispatch({ type: ADD_MESSAGE, payload: res.data })
         } catch (error) {
             if (error.response) {
                 dispatch(showAlert(error.response.status, error.response.data.message))
