@@ -30,6 +30,32 @@ router.post('/', verifyToken, async (req, res) => {
 })
 
 /*
+@route   POST api/chats/:chatId/messages
+@desc    Add new message in array
+@access  Private
+*/
+router.post('/:chatId/messages', verifyToken, async (req, res) => {
+    try {
+        const userId = jwt.decode(req.headers.authorization.split(' ')[1]).id
+        const newMessage = {
+            senderId: userId,
+            text: req.body.text,
+        }
+        const chat = await Chats.findById(req.params.chatId)
+        await chat.messages.push(newMessage)
+        await chat.save()
+        console.log(newMessage)
+        return res.status(201).send(newMessage)
+        // await newChat.save((err, chat) => {
+        //     if (err) return res.status(409).send({ message: 'Save error: ' + err })
+        //     return res.status(201).send(chat)
+        // })
+    } catch (err) {
+        return res.status(500).send({ message: 'Server error: ' + err })
+    }
+})
+
+/*
 @route          GET api/chats/
 @queryParams    userId
 @desc           Get all chats
