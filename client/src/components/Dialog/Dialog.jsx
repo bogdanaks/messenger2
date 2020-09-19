@@ -2,13 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGrin } from '@fortawesome/free-regular-svg-icons'
 import { faArrowLeft, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.scss'
 
 import { Message } from '../Message/Message'
 import { ChatSettings } from '../ChatSettings/ChatSettings'
+import { InputMessage } from '../InputMessage/InputMessage'
 
 export const Dialog = ({ chats }) => {
     const [chatSettigs, setChatSettings] = React.useState(false)
@@ -47,14 +47,7 @@ export const Dialog = ({ chats }) => {
                     <Message me />
                     <Message />
                 </div>
-                <div className={styles.content__footer}>
-                    <div className={styles.input}>
-                        <input type="text" placeholder="Type text..." />
-                    </div>
-                    <div className={styles.icons}>
-                        <FontAwesomeIcon icon={faGrin} />
-                    </div>
-                </div>
+                <InputMessage />
             </div>
         </div>
     )
