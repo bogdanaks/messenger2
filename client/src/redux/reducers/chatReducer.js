@@ -21,8 +21,13 @@ export const chatReducer = (state = initialState, action) => {
                 ...state,
                 activeChat: {
                     ...state.activeChat,
-                    messages: state.activeChat.messages.concat(action.payload),
+                    messages: state.activeChat.messages.concat(action.payload.message),
                 },
+                chats: state.chats.map((chat) =>
+                    chat._id === action.payload.inChatId
+                        ? { ...chat, messages: chat.messages.concat(action.payload.message) }
+                        : chat,
+                ),
             }
         default:
             return state
