@@ -1,3 +1,27 @@
+%scrollbar {
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgb(115, 121, 127);
+        border: none;
+        border-radius: 50px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgb(155, 159, 164);
+    }
+    ::-webkit-scrollbar-thumb:active {
+        background: rgb(155, 159, 164);
+    }
+    ::-webkit-scrollbar-track {
+        background: rgb(47, 56, 65);
+        border: none;
+        border-radius: 50px;
+    }
+    ::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+}
 .dialogWrapper {
     width: 70%;
     .header {
@@ -61,14 +85,26 @@
         flex-direction: column;
         width: 100%;
         height: calc(100% - 60px);
+        @extend %scrollbar;
+        ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow-y: scroll;
+            li {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                width: 99%;
+            }
+        }
         &__messages {
             height: 93%;
             width: 100%;
-            padding: 0 10px;
+            // padding: 0 10px;
             display: flex;
-            flex-direction: column;
             box-sizing: border-box;
-            justify-content: flex-end;
         }
     }
 }
