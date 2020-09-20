@@ -42,16 +42,20 @@ router.post('/:chatId/messages', verifyToken, async (req, res) => {
             senderName: req.body.name,
             text: req.body.text,
         }
-        await Chats.findOneAndUpdate(
-            { _id: req.params.chatId },
-            { $push: { messages: newMessage } },
-            { new: true },
-            (err, doc) => {
-                if (err) return res.status(409).send({ message: 'Save error: ' + err })
+        try {
+            const chat = await Chats.findOneAndUpdate(
+                { _id: req.params.chatId },
+                { $push: { messages: newMessage } },
+                { new: true },
+            )
 
-                return res.status(201).send(doc.messages[doc.messages.length - 1]) // return last message obj
-            },
-        )
+            return res.status(201).send({
+                inChatId: req.params.chatId,
+                message: chat.messages[chat.messages.length - 1], // return last message obj
+            })
+        } catch (error) {
+            return res.status(409).send({ message: 'Error saving message' })
+        }
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
