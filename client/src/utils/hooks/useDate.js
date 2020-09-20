@@ -17,11 +17,15 @@ export const useDate = (date) => {
         return `${day}.${month}.${year}`
     }
     const formateDateToMinutes = (date) => {
-        return `${new Date(date).getHours()}:${new Date(date).getMinutes()}`
+        return `${new Date(date).getHours()}:${
+            new Date(date).getMinutes() <= 9
+                ? '0' + new Date(date).getMinutes()
+                : new Date(date).getMinutes()
+        }`
     }
 
     if (diffDays >= 1) {
-        // If date >= 1 day, return full date
+        // If date >= 24 hours(1 day), return to full date
         dateFormat = formateDateToFull(date)
     } else {
         dateFormat = formateDateToMinutes(date)
