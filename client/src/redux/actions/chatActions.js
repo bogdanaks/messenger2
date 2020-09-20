@@ -42,7 +42,7 @@ export function initChats(chatId) {
 export function createChat(name, color, history) {
     return async (dispatch) => {
         try {
-            const { name, _id: userId } = JSON.parse(localStorage.getItem('user'))
+            const { name: userName, _id: userId } = JSON.parse(localStorage.getItem('user'))
             const res = await api.post(
                 '/api/chats',
                 { name, userId, color },
@@ -51,7 +51,7 @@ export function createChat(name, color, history) {
             dispatch({ type: NEW_CHAT, payload: { ...res.data } })
             dispatch(setActiveChat(res.data))
             history.push('/chats/' + res.data._id)
-            socketJoinChat(res.data._id, userId, name)
+            socketJoinChat(res.data._id, userId, userName)
             dispatch(hideModal())
         } catch (error) {
             if (error.response) {
