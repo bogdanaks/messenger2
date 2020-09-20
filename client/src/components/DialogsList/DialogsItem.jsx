@@ -20,7 +20,7 @@ export const DialogsItem = ({ _id, name, updatedAt, color, messages }) => {
                     <h5>{name}</h5>
                     <span>{dateFormat}</span>
                 </div>
-                <p>{messages[messages.length - 1].text}</p>
+                <p>{messages.length > 0 && messages[messages.length - 1].text}</p>
             </div>
         </li>
     )
