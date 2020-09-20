@@ -28,6 +28,7 @@ export const NewChat = () => {
                     <input
                         type="text"
                         placeholder="Chat name"
+                        autoComplete="off"
                         name="newchat"
                         value={values.newchat || ''}
                         onChange={handleChange}
