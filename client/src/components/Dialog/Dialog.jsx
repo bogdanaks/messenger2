@@ -13,9 +13,14 @@ import { InputMessage } from '../InputMessage/InputMessage'
 export const Dialog = () => {
     const [chatSettigs, setChatSettings] = React.useState(false)
     const activeChat = useSelector((state) => state.chat.activeChat)
+    const chatRef = React.useRef({})
     const handleSettingsChat = () => {
         setChatSettings(!chatSettigs)
     }
+
+    React.useEffect(() => {
+        chatRef.current.scrollTop = 99999999
+    }, [activeChat.messages])
 
     if (Object.keys(activeChat).length === 0) {
         return (
@@ -43,7 +48,7 @@ export const Dialog = () => {
             </div>
             <div className={styles.content}>
                 <div className={styles.content__messages}>
-                    <ul>
+                    <ul ref={chatRef}>
                         {activeChat.messages.map((message) => (
                             <li key={message._id}>
                                 <Message message={message} />
