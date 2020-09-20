@@ -19,7 +19,9 @@ export const Dialog = () => {
     }
 
     React.useEffect(() => {
-        chatRef.current.scrollTop = 99999999
+        if (chatRef.current) {
+            chatRef.current.scrollTop = 99999999
+        }
     }, [activeChat.messages])
 
     if (Object.keys(activeChat).length === 0) {
