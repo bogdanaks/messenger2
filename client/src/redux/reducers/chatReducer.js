@@ -17,18 +17,30 @@ export const chatReducer = (state = initialState, action) => {
         case SET_ACTIVE_CHAT:
             return { ...state, activeChat: action.payload }
         case ADD_MESSAGE:
-            return {
-                ...state,
-                activeChat: {
-                    ...state.activeChat,
-                    messages: state.activeChat.messages.concat(action.payload.message),
-                },
-                chats: state.chats.map((chat) =>
-                    chat._id === action.payload.inChatId
-                        ? { ...chat, messages: chat.messages.concat(action.payload.message) }
-                        : chat,
-                ),
+            if (Object.keys(state.activeChat).length > 0) {
+                return {
+                    ...state,
+                    activeChat: {
+                        ...state.activeChat,
+                        messages: state.activeChat.messages.concat(action.payload.message),
+                    },
+                    chats: state.chats.map((chat) =>
+                        chat._id === action.payload.inChatId
+                            ? { ...chat, messages: chat.messages.concat(action.payload.message) }
+                            : chat,
+                    ),
+                }
+            } else {
+                return {
+                    ...state,
+                    chats: state.chats.map((chat) =>
+                        chat._id === action.payload.inChatId
+                            ? { ...chat, messages: chat.messages.concat(action.payload.message) }
+                            : chat,
+                    ),
+                }
             }
+
         default:
             return state
     }
