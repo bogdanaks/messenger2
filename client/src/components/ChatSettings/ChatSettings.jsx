@@ -30,6 +30,7 @@ export const ChatSettings = ({ chat, setChatSettings }) => {
         document.addEventListener('mousedown', handleClickOutside)
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
+            setChatSettings(false)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
