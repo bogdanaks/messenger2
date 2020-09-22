@@ -7,6 +7,7 @@ import { faArrowLeft, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import styles from './styles.module.scss'
 
 import { Message } from '../Message/Message'
+import { ChatInfo } from '../ChatInfo/ChatInfo'
 import { ChatSettings } from '../ChatSettings/ChatSettings'
 import { InputMessage } from '../InputMessage/InputMessage'
 
@@ -37,10 +38,7 @@ export const Dialog = () => {
                 <div className={styles.openList}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </div>
-                <div className={styles.userInfo}>
-                    <h5>{activeChat.name}</h5>
-                    <span>{activeChat.users.length + ' members'}</span>
-                </div>
+                <ChatInfo activeChat={activeChat} />
                 <div className={styles.chatSettings} onClick={handleSettingsChat}>
                     <FontAwesomeIcon icon={faEllipsisV} />
                 </div>
