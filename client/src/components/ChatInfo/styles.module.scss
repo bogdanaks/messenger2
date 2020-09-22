@@ -1,0 +1,9 @@
+.chatInfo {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    span {
+        color: rgb(127, 145, 164);
+        font-size: 14px;
+    }
+}
