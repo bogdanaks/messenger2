@@ -3,7 +3,7 @@ import { INIT_CHAT, NEW_CHAT, DELETE_CHAT, SET_ACTIVE_CHAT } from './types'
 import { socketJoinChat, socketLeaveChat } from '../../utils/helpers/socket'
 import api from '../../utils/helpers/axios'
 import { authHeader } from '../../utils/helpers/authHeader'
-import { showAlert, hideAlert, hideModal } from './appActions'
+import { showAlert, hideAlert } from './appActions'
 
 export function initChats(chatId) {
     return async (dispatch) => {
@@ -52,7 +52,6 @@ export function createChat(name, color, history) {
             dispatch(setActiveChat(res.data))
             history.push('/chats/' + res.data._id)
             socketJoinChat(res.data._id, userId, userName)
-            dispatch(hideModal())
         } catch (error) {
             if (error.response) {
                 dispatch(showAlert(error.response.status, error.response.data.message))

@@ -1,4 +1,4 @@
-import { SHOW_ALERT, HIDE_ALERT, SHOW_MODAL, HIDE_MODAL } from './types'
+import { SHOW_ALERT, HIDE_ALERT } from './types'
 
 // Alert actions
 export function showAlert(code, message) {
@@ -9,15 +9,4 @@ export function showAlert(code, message) {
 }
 export function hideAlert() {
     return { type: HIDE_ALERT }
-}
-
-// Modal actions
-export function showModal(type, header, text) {
-    return {
-        type: SHOW_MODAL,
-        payload: { visible: true, type, header, text },
-    }
-}
-export function hideModal() {
-    return { type: HIDE_MODAL }
 }
