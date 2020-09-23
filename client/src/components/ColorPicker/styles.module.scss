@@ -1,0 +1,39 @@
+.colors {
+    width: 60%;
+    margin-top: 10px;
+    ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .color {
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            box-sizing: border-box;
+            cursor: pointer;
+            border-radius: 3px;
+            &:hover {
+                border: 2px solid #fff;
+            }
+            &.active {
+                border: 2px solid #fff;
+            }
+        }
+    }
+}
+@media (max-width: 375px) {
+    .colors {
+        width: 90% !important;
+    }
+}
+@media (min-width: 767px) {
+    .colors {
+        width: 70% !important;
+    }
+}
+@media (min-width: 991px) {
+    .colors {
+        width: 60% !important;
+    }
+}
