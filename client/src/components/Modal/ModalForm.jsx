@@ -11,7 +11,7 @@ import { validateNewChat } from '../../utils/helpers/validateNewChat'
 
 import { ColorPicker } from '../ColorPicker/ColorPicker'
 
-export const ModalForm = () => {
+export const ModalForm = ({ setOpen }) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const { errors, values, handleSubmit, handleChange } = useForm(callback, validateNewChat)
@@ -19,6 +19,7 @@ export const ModalForm = () => {
     const colors = ['#7965c1', '#cb4f87', '#4388b9', '#00A876', '#d3a924']
     function callback() {
         dispatch(createChat(values.newchat, colors[colorNum], history))
+        setOpen(false)
     }
     return (
         <div className={styles.modalContent}>
