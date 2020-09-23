@@ -51,7 +51,7 @@ export const Sidebar = () => {
             <Modal open={modalOpen} setOpen={setModalOpen}>
                 <ModalHeader>New chat</ModalHeader>
                 <ModalDescription>Enter a name and select a color for a new chat</ModalDescription>
-                <ModalForm />
+                <ModalForm setOpen={setModalOpen} />
             </Modal>
         </>
     )
