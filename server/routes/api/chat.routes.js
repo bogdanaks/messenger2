@@ -5,6 +5,7 @@ const { v4 } = require('uuid')
 
 const verifyToken = require('../../middleware/verifyJwt')
 const Chats = require('../../models/Chats.model')
+const Users = require('../../models/Users.model')
 
 /*
 @route   POST api/chats/
@@ -78,6 +79,25 @@ router.get('/', verifyToken, async (req, res) => {
             allChats = await Chats.find()
         }
         return res.status(200).send(allChats)
+    } catch (err) {
+        return res.status(500).send({ message: 'Server error: ' + err })
+    }
+})
+
+/*
+@route          GET api/chats/:chatId/users
+@desc           Get full info users
+@access         Private
+*/
+router.get('/:chatId/users', verifyToken, async (req, res) => {
+    try {
+        await Chats.findOne({ _id: req.params.chatId }, async (err, chat) => {
+            if (err) return res.status(409).send({ message: 'Find chat error' })
+            await Users.find({ _id: { $in: chat.users } }, 'name', (err, users) => {
+                if (err) return res.status(409).send({ message: 'Find users error' })
+                return res.status(200).send(users)
+            })
+        })
     } catch (err) {
         return res.status(500).send({ message: 'Server error: ' + err })
     }
