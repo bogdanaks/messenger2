@@ -58,8 +58,9 @@ git clone <CloneURL>
 cd <../path/to/server> 
 npm install
 ```
+2)	Create a .env file and write down the variables NODE_ENV, DB_URL, SECRET_KEY
 
-2) Run the start script
+3) Run the start script
 
 ``` 
 npm run server
