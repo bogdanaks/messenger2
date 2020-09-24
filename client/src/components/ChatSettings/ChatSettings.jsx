@@ -26,20 +26,7 @@ export const ChatSettings = ({ chat, setChatSettings }) => {
     const handleInviteLink = () => {
         setModalOpen(true)
     }
-    React.useEffect(() => {
-        function handleClickOutside(event) {
-            if (divRef.current && !divRef.current.contains(event.target)) {
-                setChatSettings(false)
-            }
-        }
 
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-            setChatSettings(false)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
     return (
         <>
             <div className={styles.wrapper} ref={divRef}>

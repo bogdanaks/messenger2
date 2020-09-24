@@ -57,11 +57,12 @@ export const Dialog = () => {
             <div className={styles.content}>
                 <div className={styles.content__messages}>
                     <ul ref={chatRef}>
-                        {activeChat.messages.map((message) => (
-                            <li key={message._id}>
-                                <Message message={message} />
-                            </li>
-                        ))}
+                        {activeChat.messages &&
+                            activeChat.messages.map((message) => (
+                                <li key={message._id}>
+                                    <Message message={message} />
+                                </li>
+                            ))}
                     </ul>
                 </div>
                 <InputMessage chat={activeChat} />
