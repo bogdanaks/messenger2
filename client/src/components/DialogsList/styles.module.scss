@@ -126,6 +126,12 @@
         }
     }
 }
+
+.showDialogList {
+    display: block !important;
+    width: 100% !important;
+}
+
 @media (max-width: 767px) {
     .dialogsWrapper {
         display: none;
