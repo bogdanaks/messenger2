@@ -23,8 +23,12 @@ export function initChats(chatId) {
 
             // If the argument chat id is passed, then we set it as an active chat
             if (chatId) {
+                const usersList = await api.get(`/api/chats/${chatId}/users/`, {
+                    headers: authHeader(),
+                })
                 const activeChat = chats.filter((chat) => chat._id === chatId)
-                dispatch(setActiveChat({ ...activeChat[0] }))
+                const activeChatWithUsers = { ...activeChat[0], users: usersList.data }
+                dispatch(setActiveChat(activeChatWithUsers))
             }
         } catch (error) {
             if (error.response) {
@@ -49,7 +53,12 @@ export function createChat(name, color, history) {
                 { headers: authHeader() },
             )
             dispatch({ type: NEW_CHAT, payload: { ...res.data } })
-            dispatch(setActiveChat(res.data))
+
+            const usersList = await api.get(`/api/chats/${res.data._id}/users/`, {
+                headers: authHeader(),
+            })
+            const activeChatWithUsers = { ...res.data, users: usersList.data }
+            dispatch(setActiveChat(activeChatWithUsers))
             history.push('/chats/' + res.data._id)
             socketJoinChat(res.data._id, userId, userName)
         } catch (error) {
@@ -68,10 +77,11 @@ export function createChat(name, color, history) {
 export function deleteChat(chatId, history) {
     return async (dispatch) => {
         try {
+            const { _id: userId } = JSON.parse(localStorage.getItem('user'))
             const res = await api.delete(`/api/chats/${chatId}`, { headers: authHeader() })
             history.push('/')
             dispatch({ type: DELETE_CHAT, payload: res.data })
-            socketLeaveChat(res.data)
+            socketLeaveChat({ chatId: res.data, userId })
             dispatch(setActiveChat({}))
         } catch (error) {
             if (error.response) {
@@ -95,7 +105,7 @@ export function leaveChat(chatId, history) {
             })
             history.push('/')
             dispatch({ type: DELETE_CHAT, payload: res.data })
-            socketLeaveChat(res.data)
+            socketLeaveChat({ chatId: res.data, userId })
             dispatch(setActiveChat({}))
         } catch (error) {
             if (error.response) {
@@ -155,8 +165,11 @@ export function getChatByInviteId(inviteId) {
 }
 
 export function setActiveChat(chat) {
-    return {
-        type: SET_ACTIVE_CHAT,
-        payload: chat,
+    return async (dispatch) => {
+        const usersList = await api.get(`/api/chats/${chat._id}/users/`, {
+            headers: authHeader(),
+        })
+        const activeChatWithUsers = { ...chat, users: usersList.data }
+        dispatch({ type: SET_ACTIVE_CHAT, payload: activeChatWithUsers })
     }
 }
