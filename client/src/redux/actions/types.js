@@ -1,5 +1,7 @@
 export const SHOW_ALERT = 'ALERT/SHOW_ALERT'
 export const HIDE_ALERT = 'ALERT/HIDE_ALERT'
+export const HIDE_DIALOG = 'ALERT/HIDE_DIALOG'
+export const SHOW_DIALOG = 'ALERT/SHOW_DIALOG'
 
 export const SET_USER = 'USER/SET_USER'
 
