@@ -3,7 +3,7 @@ import { INIT_CHAT, NEW_CHAT, DELETE_CHAT, SET_ACTIVE_CHAT } from './types'
 import { socketJoinChat, socketLeaveChat } from '../../utils/helpers/socket'
 import api from '../../utils/helpers/axios'
 import { authHeader } from '../../utils/helpers/authHeader'
-import { showAlert, hideAlert } from './appActions'
+import { showAlert, hideAlert, showDialog } from './appActions'
 
 export function initChats(chatId) {
     return async (dispatch) => {
@@ -171,5 +171,6 @@ export function setActiveChat(chat) {
         })
         const activeChatWithUsers = { ...chat, users: usersList.data }
         dispatch({ type: SET_ACTIVE_CHAT, payload: activeChatWithUsers })
+        dispatch(showDialog())
     }
 }
