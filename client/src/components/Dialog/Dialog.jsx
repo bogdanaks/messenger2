@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
@@ -10,13 +10,21 @@ import { Message } from '../Message/Message'
 import { ChatInfo } from '../ChatInfo/ChatInfo'
 import { ChatSettings } from '../ChatSettings/ChatSettings'
 import { InputMessage } from '../InputMessage/InputMessage'
+import { hideDialog } from '../../redux/actions/appActions'
 
 export const Dialog = () => {
     const [chatSettigs, setChatSettings] = React.useState(false)
     const activeChat = useSelector((state) => state.chat.activeChat)
+    const showDialog = useSelector((state) => state.app.showDialog)
     const chatRef = React.useRef({})
+    const dispatch = useDispatch()
+
     const handleSettingsChat = () => {
         setChatSettings(!chatSettigs)
+    }
+    const handleOpenDialogList = () => {
+        console.log('open dialog list')
+        dispatch(hideDialog())
     }
 
     React.useEffect(() => {
@@ -33,10 +41,10 @@ export const Dialog = () => {
         )
     }
     return (
-        <div className={styles.dialogWrapper}>
+        <div className={[styles.dialogWrapper, showDialog ? '' : styles.hiddenDialog].join(' ')}>
             <div className={styles.header}>
                 <div className={styles.openList}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
+                    <FontAwesomeIcon icon={faArrowLeft} onClick={handleOpenDialogList} />
                 </div>
                 <ChatInfo activeChat={activeChat} />
                 <div className={styles.chatSettings} onClick={handleSettingsChat}>
