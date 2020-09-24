@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGrin } from '@fortawesome/free-regular-svg-icons'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import styles from './styles.module.scss'
 
@@ -32,7 +31,6 @@ export const InputMessage = ({ chat }) => {
                     />
                 </div>
                 <div className={styles.icons}>
-                    <FontAwesomeIcon icon={faGrin} />
                     <button className={styles.iconSend} type="submit">
                         <FontAwesomeIcon icon={faPaperPlane} />
                     </button>
