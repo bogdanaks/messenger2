@@ -166,11 +166,16 @@ export function getChatByInviteId(inviteId) {
 
 export function setActiveChat(chat) {
     return async (dispatch) => {
-        const usersList = await api.get(`/api/chats/${chat._id}/users/`, {
-            headers: authHeader(),
-        })
-        const activeChatWithUsers = { ...chat, users: usersList.data }
-        dispatch({ type: SET_ACTIVE_CHAT, payload: activeChatWithUsers })
+        if (chat._id) {
+            const usersList = await api.get(`/api/chats/${chat._id}/users/`, {
+                headers: authHeader(),
+            })
+            const activeChatWithUsers = { ...chat, users: usersList.data }
+            dispatch({ type: SET_ACTIVE_CHAT, payload: activeChatWithUsers })
+        } else {
+            dispatch({ type: SET_ACTIVE_CHAT, payload: chat })
+        }
+
         dispatch(showDialog())
     }
 }
