@@ -12,14 +12,14 @@ export const socketJoinChat = (chatId, userId, name) => {
     })
 }
 
-export const socketLeaveChat = (chatId) => {
-    socket.emit('CHAT:LEAVE', { chatId })
-}
-
-export const socketGetMessages = () => {
+export const initSocket = () => {
     socket.on('CHAT:GET_MESSAGE', (payload) => {
         store.dispatch({ type: ADD_MESSAGE, payload })
     })
+}
+
+export const socketLeaveChat = (chatId, userId) => {
+    socket.emit('CHAT:LEAVE', { chatId, userId })
 }
 
 export const socketSendMessage = (msg) => {
