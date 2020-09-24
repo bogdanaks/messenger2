@@ -23,9 +23,6 @@ export const DialogsList = () => {
     }, [])
     return (
         <div className={[styles.dialogsWrapper, showDialog ? '' : styles.showDialogList].join(' ')}>
-            <div className={styles.find}>
-                <input type="text" placeholder="Find" />
-            </div>
             <div className={styles.dialogs}>
                 <ul>
                     {chats.map((item) => (
