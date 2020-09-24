@@ -12,6 +12,7 @@ export const DialogsList = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const chats = useSelector((state) => state.chat.chats)
+    const showDialog = useSelector((state) => state.app.showDialog)
 
     const handleChatCLick = (item) => {
         dispatch(setActiveChat(item))
@@ -21,7 +22,7 @@ export const DialogsList = () => {
         // eslint-disable-next-line
     }, [])
     return (
-        <div className={styles.dialogsWrapper}>
+        <div className={[styles.dialogsWrapper, showDialog ? '' : styles.showDialogList].join(' ')}>
             <div className={styles.find}>
                 <input type="text" placeholder="Find" />
             </div>
