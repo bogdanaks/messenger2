@@ -1,6 +1,5 @@
-import { SHOW_ALERT, HIDE_ALERT } from './types'
+import { SHOW_ALERT, HIDE_ALERT, HIDE_DIALOG, SHOW_DIALOG } from './types'
 
-// Alert actions
 export function showAlert(code, message) {
     return {
         type: SHOW_ALERT,
@@ -9,4 +8,11 @@ export function showAlert(code, message) {
 }
 export function hideAlert() {
     return { type: HIDE_ALERT }
+}
+
+export function hideDialog() {
+    return { type: HIDE_DIALOG }
+}
+export function showDialog() {
+    return { type: SHOW_DIALOG }
 }
