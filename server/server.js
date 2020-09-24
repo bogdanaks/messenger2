@@ -22,11 +22,10 @@ app.use('/api/chats', require('./routes/api/chat.routes'))
 
 //socket
 io.on('connection', (socket) => {
-    console.log('Socket connection')
-
     socket.on('CHAT:JOIN', (data) => {
         socket.join(data.chatId)
     })
+
     socket.on('CHAT:LEAVE', (data) => {
         socket.leave(data.chatId)
     })
@@ -35,9 +34,7 @@ io.on('connection', (socket) => {
         socket.to(data.inChatId).emit('CHAT:GET_MESSAGE', data)
     })
 
-    socket.on('disconnect', () => {
-        console.log('Socket disconnect')
-    })
+    socket.on('disconnect', () => {})
 })
 
 //start server
